@@ -5,17 +5,20 @@
             <!-- КОМПОНЕНТ ФИЛЬТР КНОПОК -->
             <Filter />
             <!--TODO КОМПОНЕНТ СЛАЙДЕР -->
+            <Slider />
         </div>
     </section>
 </template>
 
 <script>
 import Filter from "@/components/Filter.vue";
+import Slider from "@/components/Slider.vue";
 
 export default {
     name: "Home",
     components: {
         Filter,
+        Slider,
     },
 };
 </script>
@@ -27,6 +30,7 @@ export default {
     padding: 0 15px
 .travels
     padding: 45px 0 134px 0
+    position: relative
 .title
     font-weight: bold
     font-size: 36px
