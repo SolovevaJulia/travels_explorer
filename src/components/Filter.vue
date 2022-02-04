@@ -67,10 +67,3 @@ export default {
         cursor: default
         background-color: #F3475B
 </style>
-
-// computed: { // ...mapGetters(["filterBtns"]), // uniqumeCountryBtn() { // let
-res = this.filterBtns.reduce((accumulator, currentValue) => { // if ( //
-accumulator.every( // (item) => !(item.name === currentValue.name) // ) // ) //
-accumulator.push(currentValue); // return accumulator; // }, []); // return res;
-// }, // }, // mounted() { // this.$store.dispatch("set_create_btns_filter"); //
-},
