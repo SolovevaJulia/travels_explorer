@@ -1,15 +1,13 @@
 <template>
-    <nav>
-        <button
-            @click="onClickBtnCountry(country.name)"
-            :class="btnActive === country.name ? 'btn-active' : ''"
-            class="btn"
-            v-for="country in uniqumeCountryBtn"
-            :key="country.id"
-        >
-            {{ country.name }}
-        </button>
-    </nav>
+       <button
+           @click="onClickBtnCountry(country.name)"
+           :class="btnActive === country.name ? 'btn-active' : ''"
+           class="btn"
+           v-for="country in uniqumeCountryBtn"
+           :key="country.id"
+       >
+           {{ country.name }}
+       </button>
 </template>
 
 <script>
