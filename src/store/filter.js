@@ -125,19 +125,3 @@ export default {
     },
 };
 
-// filterBtns: [{ name: "All countries" }],
-
-// NEW_BTN_FILTER(state) {
-//     state.imgList.forEach((item) => {
-//         state.filterBtns = [
-//             ...state.filterBtns,
-//             { name: item.country },
-//         ];
-//     });
-// },
-
-// set_create_btns_filter({ commit }) {
-//     commit("NEW_BTN_FILTER");
-// },
-
-// filterBtns: (btn) => btn.filterBtns,
