@@ -5,7 +5,7 @@
             @click="onClickBtnCountry(country.name)"
             :class="btnActive === country.name ? 'btn-active' : ''"
             class="btn"
-            v-for="country in buttons"
+            v-for="country in uniqumeCountryBtn"
             :key="country.id"
         >
             {{ country.name }}
@@ -14,23 +14,36 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
+    computed: {
+        ...mapGetters(["filterBtns"]),
+        uniqumeCountryBtn() {
+            let res = this.filterBtns.reduce((accumulator, currentValue) => {
+                if (
+                    accumulator.every(
+                        (item) => !(item.name === currentValue.name)
+                    )
+                )
+                    accumulator.push(currentValue);
+                return accumulator;
+            }, []);
+            return res;
+        },
+    },
+
     data: () => ({
         btnActive: "All countries",
-        buttons: [
-            { name: "All countries", id: 0 },
-            { name: "Italy", id: 1 },
-            { name: "Germany", id: 2 },
-            { name: "Greece", id: 3 },
-            { name: "Turkey", id: 4 },
-            { name: "Spain", id: 5 },
-            { name: "Portugal", id: 6 },
-        ],
     }),
     methods: {
         onClickBtnCountry(payload) {
             this.btnActive = payload;
+            this.$store.dispatch("set_filter_countries", payload);
         },
+    },
+    mounted() {
+        this.$store.dispatch("set_filter_btns");
     },
 };
 </script>
@@ -54,3 +67,10 @@ export default {
         cursor: default
         background-color: #F3475B
 </style>
+
+// computed: { // ...mapGetters(["filterBtns"]), // uniqumeCountryBtn() { // let
+res = this.filterBtns.reduce((accumulator, currentValue) => { // if ( //
+accumulator.every( // (item) => !(item.name === currentValue.name) // ) // ) //
+accumulator.push(currentValue); // return accumulator; // }, []); // return res;
+// }, // }, // mounted() { // this.$store.dispatch("set_create_btns_filter"); //
+},

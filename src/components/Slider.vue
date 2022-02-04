@@ -8,11 +8,19 @@
         </div>
         <div class="slider-block border border-yellow-400 mt-10 h-">
             <swiper
+                :breakpoints="{
+                    0: {
+                        pagination: true,
+                    },
+                    780: {
+                        pagination: false,
+                    },
+                }"
                 :slidesPerView="6"
+                :slidesPerColumn="2"
                 :grid="{
                     rows: 2,
                 }"
-                :spaceBetween="30"
                 :pagination="{
                     clickable: true,
                 }"
@@ -23,12 +31,22 @@
                 class="mySwiper w-1/4"
             >
                 <swiper-slide
-                    :class="`slide-${item.city}`"
-                    v-for="(item, index) in imgList"
+                    ref="slider"
+                    v-for="(item, index) in filterCountry"
+                    :id="item.id"
                     :key="index"
-                    ><div class="slide-info">
-                        <p class="slide-city">{{ item.city }}</p>
-                        <p class="slide-country">{{ item.country }}</p>
+                >
+                    <div
+                        class="swiper-slide-left"
+                        :class="`slide-${item.city}`"
+                    >
+                        <div class="slide-info">
+                            <p class="slide-city">{{ item.city }}</p>
+                            <p class="slide-country">{{ item.country }}</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide-right">
+                        <!-- <p class="slide-descr">{{ item.descr }}</p> -->
                     </div>
                 </swiper-slide>
             </swiper>
@@ -37,6 +55,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from "swiper/vue";
 
@@ -55,132 +74,140 @@ import SwiperCore, { Pagination, Navigation } from "swiper";
 
 // install Swiper modules
 SwiperCore.use([Pagination, Navigation]);
+
 export default {
+    computed: { ...mapGetters(["filterCountry"]) },
     components: {
         Swiper,
         SwiperSlide,
     },
-    data: () => ({
-        imgList: [
-            {
-                id: 0,
-                country: "italy",
-                city: "milan",
-            },
-            {
-                id: 1,
-                country: "germany",
-                city: "freiburg",
-            },
-            {
-                id: 2,
-                country: "portugal",
-                city: "lisbon",
-            },
-            {
-                id: 3,
-                country: "italy",
-                city: "vicenza",
-            },
-            {
-                id: 4,
-                country: "spain",
-                city: "barcelona",
-            },
-            {
-                id: 5,
-                country: "portugal",
-                city: "porto",
-            },
-            {
-                id: 6,
-                country: "greece",
-                city: "athens",
-            },
-            {
-                id: 7,
-                country: "turkey",
-                city: "kash",
-            },
-            {
-                id: 8,
-                country: "spain",
-                city: "madrid",
-            },
-            {
-                id: 9,
-                country: "germany",
-                city: "berlin",
-            },
-            {
-                id: 10,
-                country: "turkey",
-                city: "antalya",
-            },
-            {
-                id: 11,
-                country: "italy",
-                city: "venice",
-            },
-        ],
-    }),
+    beforeMount() {
+        this.$store.dispatch("set_filter_countries", "All countries");
+    },
 };
 </script>
 
 <style lang="sass">
+.swiper-wrapper
+    gap: 30px
+    padding-bottom: 20px
+.swiper-container-multirow-column
+    & > .swiper-wrapper
+        flex-direction: row
 .swiper-slide
-    width: 170px !important
+    max-width: 170px !important
+    // min-width: 20px!important
     height: 250px !important
     background-size: cover
     border-radius: 8px
-    // background: linear-gradient(0deg, rgba(18, 24, 42, 0.5) 0%, rgba(139, 141, 147, 0) 71%)
-    // filter: drop-shadow(0px 4px 30px rgba(0, 0, 0, 0.25))
+    -webkit-box-shadow: 10px 10px 20px -4px rgba(0, 0, 0, 0.5)
+    -moz-box-shadow: 10px 10px 20px -4px rgba(0, 0, 0, 0.5)
+    box-shadow: 10px 10px 20px -4px rgba(0, 0, 0, 0.5)
+    // display: flex
+    // overflow: hidden
+    // &:hover
+    //     max-width: 570px!important
+    //     overflow: visible
+    &-left
+        height: inherit
+        min-width: 170px !important
+        border-radius: 8px
+        display: flex
+        align-items: end
+        // &:hover
+        //     .swiper-slide-right
+        //         max-width: 400px
+    // &-right
+    //     width: 400px
 .slide
+    &-descr
+        font-style: normal
+        font-weight: normal
+        font-size: 16px
+        line-height: 140%
+        color: white
+        width: 400px
+        height: inherit
     &-info
-        padding: 193px 16px 16px 16px
+        padding-bottom: 16px
+        padding-left: 16px
     &-city
         color: white
-        font-weight: 900
+        font-family: "GolosTextWebDemiBold"
         font-size: 16px
         line-height: 19px
         text-transform: capitalize
     &-country
+        font-family: "GolosTextWebRegular"
         color: white
-        font-weight: normal
         font-size: 16px
         line-height: 19px
         text-transform: capitalize
-    &-milan
-        background-image: url('../assets/img/Milan.jpg')
-    &-freiburg
-        background-image: url('../assets/img/Freiburg.jpg')
-    &-lisbon
-        background-image: url('../assets/img/Lisbon.jpg')
-    &-vicenza
-        background-image: url('../assets/img/Vicenza.jpg')
-    &-barcelona
-        background-image: url('../assets/img/Barcelona.jpg')
-    &-porto
-        background-image: url('../assets/img/Porto.jpg')
-    &-athens
-        background-image: url('../assets/img/Athens.jpg')
-    &-kash
-        background-image: url('../assets/img/Kash.jpg')
-    &-madrid
-        background-image: url('../assets/img/Madrid.jpg')
-    &-berlin
-        background-image: url('../assets/img/Berlin.jpg')
-    &-antalya
-        background-image: url('../assets/img/Antalya.jpg')
-    &-venice
-        background-image: url('../assets/img/Venice.jpg')
+    &-Milan
+        background-image: url('../assets/img/1x/Milan.jpg')
+        @media (min-resolution: 2dppx)
+            background-image: url('../assets/img/Retina/Milan2x.jpg')
+    &-Freiburg
+        background-image: url('../assets/img/1x/Freiburg.jpg')
+        @media (min-resolution: 2dppx)
+            background-image: url('../assets/img/Retina/Freiburg2x.jpg')
+    &-Lisbon
+        background-image: url('../assets/img/1x/Lisbon.jpg')
+        @media (min-resolution: 2dppx)
+            background-image: url('../assets/img/Retina/Lisbon2x.jpg')
+    &-Vicenza
+        background-image: url('../assets/img/1x/Vicenza.jpg')
+        @media (min-resolution: 2dppx)
+            background-image: url('../assets/img/Retina/Vicenza2x.jpg')
+    &-Barcelona
+        background-image: url('../assets/img/1x/Barcelona.jpg')
+        @media (min-resolution: 2dppx)
+            background-image: url('../assets/img/Retina/Barcelona2x.jpg')
+    &-Porto
+        background-image: url('../assets/img/1x/Porto.jpg')
+        @media (min-resolution: 2dppx)
+            background-image: url('../assets/img/Retina/Porto2x.jpg')
+    &-Athens
+        background-image: url('../assets/img/1x/Athens.jpg')
+        @media (min-resolution: 2dppx)
+            background-image: url('../assets/img/Retina/Athens2x.jpg')
+    &-Kash
+        background-image: url('../assets/img/1x/Kash.jpg')
+        @media (min-resolution: 2dppx)
+            background-image: url('../assets/img/Retina/Kash2x.jpg')
+    &-Madrid
+        background-image: url('../assets/img/1x/Madrid.jpg')
+        @media (min-resolution: 2dppx)
+            background-image: url('../assets/img/Retina/Madrid2x.jpg')
+    &-Berlin
+        background-image: url('../assets/img/1x/Berlin.jpg')
+        @media (min-resolution: 2dppx)
+            background-image: url('../assets/img/Retina/Berlin2x.jpg')
+    &-Antalya
+        background-image: url('../assets/img/1x/Antalya.jpg')
+        @media (min-resolution: 2dppx)
+            background-image: url('../assets/img/Retina/Antalya2x.jpg')
+    &-Venice
+        background-image: url('../assets/img/1x/Venice.jpg')
+        @media (min-resolution: 2dppx)
+            background-image: url('../assets/img/Retina/Venice2x.jpg')
 .button
     &-prev, &-next
+        display: flex
+        align-items: center
+        justify-content: center
         position: absolute
         top: 50%
         cursor: pointer
+        background-color: transparent
+        border: none
+        border-radius: 50%
+        width: 40px
+        height: 40px
+        &:hover
+            background-color: #FE003D
     &-next
-        right: 0
+        right: 1%
     &-prev
-        left: 0
+        left: 1%
 </style>

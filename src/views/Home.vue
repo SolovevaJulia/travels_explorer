@@ -32,7 +32,7 @@ export default {
     padding: 45px 0 134px 0
     position: relative
 .title
-    font-weight: bold
+    font-family: "GolosTextWebMedium"
     font-size: 36px
     line-height: 53px
     color: white

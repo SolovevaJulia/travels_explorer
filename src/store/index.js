@@ -1,12 +1,8 @@
-import { createStore } from 'vuex'
+import filter from "../store/filter.js";
+import { createStore } from "vuex";
 
 export default createStore({
-  state: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
-  modules: {
-  }
-})
+    modules: {
+        filter,
+    },
+});
