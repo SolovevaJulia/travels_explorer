@@ -1,5 +1,4 @@
 <template>
-    <!-- Верстка -->
     <nav>
         <button
             @click="onClickBtnCountry(country.name)"
