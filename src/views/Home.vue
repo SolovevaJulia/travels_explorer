@@ -2,9 +2,7 @@
     <section class="travels">
         <div class="container">
             <h1 class="title">Our travels</h1>
-            <!-- КОМПОНЕНТ ФИЛЬТР КНОПОК -->
             <Filter />
-            <!--TODO КОМПОНЕНТ СЛАЙДЕР -->
             <Slider />
         </div>
     </section>
