@@ -1,57 +1,54 @@
 <template>
-    <div>
-        <div class="button-prev">
-            <img src="../assets/img/arrow_default_left.svg" alt="" />
-        </div>
-        <div class="button-next">
-            <img src="../assets/img/arrow_active_right.svg" alt="" />
-        </div>
-        <div class="slider-block border border-yellow-400 mt-10 h-">
-            <swiper
-                :breakpoints="{
-                    0: {
-                        pagination: true,
-                    },
-                    780: {
-                        pagination: false,
-                    },
-                }"
-                :slidesPerView="6"
-                :slidesPerColumn="2"
-                :grid="{
-                    rows: 2,
-                }"
-                :pagination="{
-                    clickable: true,
-                }"
-                :navigation="{
-                    nextEl: '.button-next',
-                    prevEl: '.button-prev',
-                }"
-                class="mySwiper w-1/4"
+    <div class="button-prev">
+        <img src="../assets/img/arrow_default_left.svg" alt="" />
+    </div>
+    <div class="button-next">
+        <img src="../assets/img/arrow_active_right.svg" alt="" />
+    </div>
+    <!-- <div class="container-swiper"> -->
+    <div class="slider-block border border-yellow-400 mt-10 h-">
+        <swiper
+            :breakpoints="{
+                375: {
+                    slidesPerView: 1.7,
+                    slidesPerColumn: 2,
+                },
+                768: {
+                    slidesPerView: 2.7,
+                    slidesPerColumn: 2,
+                },
+                1440: {
+                    slidesPerView: 6,
+                    slidesPerColumn: 2,
+                },
+            }"
+            :observer="true"
+            :pagination="{ el: '.swiper-pagination', clickable: true }"
+            :navigation="{ nextEl: '.button-next', prevEl: '.button-prev' }"
+        >
+            <swiper-slide
+                ref="slider"
+                v-for="(item, index) in filterCountry"
+                :id="item.id"
+                :key="index"
             >
-                <swiper-slide
-                    ref="slider"
-                    v-for="(item, index) in filterCountry"
-                    :id="item.id"
-                    :key="index"
-                >
-                    <div
-                        class="swiper-slide-left"
-                        :class="`slide-${item.city}`"
-                    >
-                        <div class="slide-info">
-                            <p class="slide-city">{{ item.city }}</p>
-                            <p class="slide-country">{{ item.country }}</p>
-                        </div>
+                <div class="swiper-slide-left" :class="`slide-${item.city}`">
+                    <div class="slide-info">
+                        <p class="slide-city">{{ item.city }}</p>
+                        <p class="slide-country">{{ item.country }}</p>
                     </div>
-                    <div class="swiper-slide-right">
-                        <!-- <p class="slide-descr">{{ item.descr }}</p> -->
-                    </div>
-                </swiper-slide>
-            </swiper>
+                </div>
+                <!-- <div class="swiper-slide-right">
+                        <p class="slide-descr">{{ item.descr }}</p>
+                        <button class="slide-btn-more">Learn more</button>
+                    </div> -->
+            </swiper-slide>
+        </swiper>
+        <div class="pagination-wrapper">
+            <div class="swiper-pagination"></div>
         </div>
     </div>
+    <!-- </div> -->
 </template>
 
 <script>
@@ -89,25 +86,27 @@ export default {
 
 <style lang="sass">
 .swiper-wrapper
-    gap: 30px
+    gap: 36px
     padding-bottom: 20px
 .swiper-container-multirow-column
     & > .swiper-wrapper
         flex-direction: row
 .swiper-slide
-    max-width: 170px !important
+    width: 170px !important
     // min-width: 20px!important
     height: 250px !important
     background-size: cover
-    border-radius: 8px
+    border-radius: 17px
     -webkit-box-shadow: 10px 10px 20px -4px rgba(0, 0, 0, 0.5)
     -moz-box-shadow: 10px 10px 20px -4px rgba(0, 0, 0, 0.5)
     box-shadow: 10px 10px 20px -4px rgba(0, 0, 0, 0.5)
-    // display: flex
-    // overflow: hidden
-    // &:hover
-    //     max-width: 570px!important
-    //     overflow: visible
+    display: flex
+    overflow: hidden
+    transition-property: width
+    transition-duration: .8s
+    &:hover
+        // width: 570px!important
+        // overflow: visible
     &-left
         height: inherit
         min-width: 170px !important
@@ -117,20 +116,29 @@ export default {
         // &:hover
         //     .swiper-slide-right
         //         max-width: 400px
-    // &-right
-    //     width: 400px
+    &-right
+        min-width: 400px
+
 .slide
     &-descr
-        font-style: normal
+        font-style: 'GolosTextWebRegular'
         font-weight: normal
         font-size: 16px
         line-height: 140%
         color: white
-        width: 400px
         height: inherit
+        padding: 25px 30px 0 30px
+        min-height: 139px
+    &-btn-more
+        background-color: #FE003D
+        color: white
+        padding: 13px 21px
+        margin: 14px 0 14px 30px
+        border-radius: 8px
     &-info
-        padding-bottom: 16px
-        padding-left: 16px
+        position: absolute
+        bottom: 16px
+        left: 16px
     &-city
         color: white
         font-family: "GolosTextWebDemiBold"
@@ -204,10 +212,74 @@ export default {
         border-radius: 50%
         width: 40px
         height: 40px
+        transition: .8s
         &:hover
             background-color: #FE003D
+
     &-next
-        right: 1%
+        right: 49px
     &-prev
-        left: 1%
+        left: 49px
+.swiper-pagination
+    display: none
+@media screen and  (min-width: 768px) and (max-width: 1439px)
+    .button
+        &-prev, &-next
+            display: none
+    .swiper-wrapper
+        // width: 1440px !important
+        gap: 20px
+    .swiper-slide
+        width: 216px !important
+        height: 317px !important
+        &-left
+            min-width: 216px !important
+    .swiper-pagination
+        margin-top: 20px
+        position: relative
+        left: 50%
+        transform: translate(-50%, 0)
+        display: flex
+        justify-content: space-between
+        height: 7px
+        width: 58px
+        align-items: center
+    .swiper-pagination-bullet
+        background-color: white
+        opacity: 1
+        &-active
+            background-color: #FE003D
+            border: 1px solid #FE003D
+@media screen and  (min-width: 375px) and (max-width: 767px)
+    .button
+        &-prev, &-next
+            display: none
+    .swiper-wrapper
+        // width: 1440px !important
+        gap: 18px
+    .swiper-slide
+        width: 158px !important
+        height: 230px !important
+        &-left
+            min-width: 158px !important
+    .swiper-pagination
+        margin-top: 20px
+        position: relative
+        left: 50%
+        transform: translate(-50%, 0)
+        display: flex
+        height: 7px
+    .swiper-pagination-bullet
+        background-color: white
+        opacity: 1
+        margin-right: 10px
+        &-active
+            background-color: #FE003D
+            border: 1px solid #FE003D
+        &:last-child
+            margin-right: 0
+    .pagination-wrapper
+        width: 100%
+        display: flex
+        align-items: center
 </style>

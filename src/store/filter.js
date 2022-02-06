@@ -75,18 +75,6 @@ export default {
                 city: "Antalya",
                 descr: "Freiburg im Breisgau is a vibrant university town in the Black Forest in southwestern Germany, known for its temperate climate and the medieval Old Town rebuilt after the war.",
             },
-            {
-                id: 12,
-                country: "Italy",
-                city: "Venice",
-                descr: "Freiburg im Breisgau is a vibrant university town in the Black Forest in southwestern Germany, known for its temperate climate and the medieval Old Town rebuilt after the war.",
-            },
-            {
-                id: 13,
-                country: "Italy",
-                city: "Venice",
-                descr: "Freiburg im Breisgau is a vibrant university town in the Black Forest in southwestern Germany, known for its temperate climate and the medieval Old Town rebuilt after the war.",
-            },
         ],
     },
 
@@ -124,20 +112,3 @@ export default {
         filterBtns: (btn) => btn.filterBtns,
     },
 };
-
-// filterBtns: [{ name: "All countries" }],
-
-// NEW_BTN_FILTER(state) {
-//     state.imgList.forEach((item) => {
-//         state.filterBtns = [
-//             ...state.filterBtns,
-//             { name: item.country },
-//         ];
-//     });
-// },
-
-// set_create_btns_filter({ commit }) {
-//     commit("NEW_BTN_FILTER");
-// },
-
-// filterBtns: (btn) => btn.filterBtns,

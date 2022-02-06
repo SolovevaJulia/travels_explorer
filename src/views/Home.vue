@@ -25,7 +25,7 @@ export default {
 
 <style lang="sass">
 .container
-    width: 1200px
+    max-width: 1200px
     margin: 0 auto
     padding: 0 15px
 .travels
@@ -37,4 +37,17 @@ export default {
     line-height: 53px
     color: white
     margin-bottom: 18px
+@media screen and  (min-width: 768px) and (max-width: 1439px)
+    .container
+        width: 688px
+        padding: 0 40px
+    .title
+        font-family: "GolosTextWebRegular"
+@media screen and  (min-width: 375px) and (max-width: 767px)
+    .container
+        max-width: 335px
+        padding: 0 20px
+    .title
+        font-size: 30px
+        font-family: "GolosTextWebRegular"
 </style>
