@@ -4,8 +4,8 @@
             @click="onClickBtnCountry(country.name)"
             :class="btnActive === country.name ? 'btn-active' : ''"
             class="btn"
-            v-for="country in uniqumeCountryBtn"
-            :key="country.id"
+            v-for="(country, index) in uniqumeCountryBtn"
+            :key="index"
         >
             {{ country.name }}
         </button>
@@ -25,8 +25,8 @@
                 "
                 @click="onClickBtnCountry(country.name)"
                 class="selected-overlay"
-                v-for="country in uniqumeCountryBtn"
-                :key="country.id"
+                v-for="(country, index) in uniqumeCountryBtn"
+                :key="index"
             >
                 <img
                     v-if="btnActive === country.name"
@@ -74,10 +74,10 @@ export default {
         openMenu: false,
     }),
     methods: {
-        onClickBtnCountry(payload) {
-            this.btnActive = payload;
+        onClickBtnCountry(nameCountry) {
+            this.btnActive = nameCountry;
             this.openMenu = false;
-            this.$store.dispatch("set_filter_countries", payload);
+            this.$store.dispatch("set_filter_countries", nameCountry);
         },
     },
     mounted() {

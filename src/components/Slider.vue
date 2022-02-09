@@ -5,7 +5,6 @@
     <div class="button-next">
         <img src="../assets/img/arrow_active_right.svg" alt="" />
     </div>
-    <!-- <div class="container-swiper"> -->
     <div class="slider-block border border-yellow-400 mt-10 h-">
         <swiper
             :breakpoints="{
@@ -32,7 +31,11 @@
                 :id="item.id"
                 :key="index"
             >
-                <div class="swiper-slide-left" :class="`slide-${item.city}`">
+                <div
+                    style="background-repeat: no-repeat; background-size: cover"
+                    class="swiper-slide-left"
+                    :class="`slide-${item.city}`"
+                >
                     <div class="slide-info">
                         <p class="slide-city">{{ item.city }}</p>
                         <p class="slide-country">{{ item.country }}</p>
@@ -48,28 +51,20 @@
             <div class="swiper-pagination"></div>
         </div>
     </div>
-    <!-- </div> -->
 </template>
 
 <script>
 import { mapGetters } from "vuex";
-// Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from "swiper/vue";
 
-// swiper bundle styles
 import "swiper/swiper-bundle.min.css";
-
-// swiper core styles
 import "swiper/swiper.min.css";
 
-// modules styles
 import "swiper/components/navigation/navigation.min.css";
 import "swiper/components/pagination/pagination.min.css";
 
-// import Swiper core and required modules
 import SwiperCore, { Pagination, Navigation } from "swiper";
 
-// install Swiper modules
 SwiperCore.use([Pagination, Navigation]);
 
 export default {
@@ -93,7 +88,6 @@ export default {
         flex-direction: row
 .swiper-slide
     width: 170px !important
-    // min-width: 20px!important
     height: 250px !important
     background-size: cover
     border-radius: 17px
@@ -227,7 +221,6 @@ export default {
         &-prev, &-next
             display: none
     .swiper-wrapper
-        // width: 1440px !important
         gap: 20px
     .swiper-slide
         width: 216px !important
@@ -255,7 +248,6 @@ export default {
         &-prev, &-next
             display: none
     .swiper-wrapper
-        // width: 1440px !important
         gap: 18px
     .swiper-slide
         width: 158px !important

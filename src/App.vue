@@ -6,9 +6,6 @@
 *
     margin: 0
     padding: 0
-// :-webkit-any(article, aside, nav, section) h1
-//     margin-block-start: 0em
-//     margin-block-end: 0em
 #app, body
     padding: 0
     margin: 0

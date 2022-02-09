@@ -84,16 +84,14 @@ export default {
                 state.filterCountry = state.imgList;
             } else {
                 state.filterCountry = state.imgList.filter(
-                    (city) => country === city.country
+                    (item) => item.country === country
                 );
             }
         },
         FILTER_BTNS(state) {
             state.imgList.forEach((country) => {
-                state.filterBtns = [
-                    ...state.filterBtns,
-                    { name: country.country },
-                ];
+                state.filterBtns.push({ name: country.country });
+                // state.filterBtns = [...state.filterBtns, { name: country.country }];
             });
         },
     },
